@@ -1,4 +1,3 @@
-# библиотеки для сбора информации от API и для google drive API
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
@@ -12,7 +11,7 @@ print(upd_since)
 def kresla_kachalki():
     # запрос к API INSALES
     r = requests.get(
-        'https://140d1bd97973304d27857fc0a389d0d3:2e0ccf9b3fa00f4cfcb63e6734e025b4@myshop-ux446.myinsales.ru/admin/orders.json'
+        'https://***LOGIN***:***PASS***@***SHOPNAME***.myinsales.ru/admin/orders.json'
         '?updated_since=2022-03-06T00%3A00%3A00+%2B03%3A00&per_page=100&page=1')
 
     if r.status_code == 200:
@@ -26,7 +25,7 @@ def kresla_kachalki():
     with open('data_kresla.json', 'w') as convert_file:
         convert_file.write(json.dumps(r.json(), indent=4))
 
-    # разбор датафрейма на колонки с нужной информацией
+    # разбор датафрейма на колонки
     # dataframe с колонкой Номер заказа - order_lines / order_id
     order_id = []
     for i in data:
@@ -188,7 +187,7 @@ def kresla_kachalki():
 def leset_mabel():
     # запрос к API INSALES
     r = requests.get(
-        'https://ef7f7fb12845d6f90eef3c16ea3ed762:fd677d479adfc2d21fad80665badb427@myshop-wv639.myinsales.ru/admin/orders.json'
+        'https://***LOGIN***:***PASS***@***SHOPNAME***.myinsales.ru/admin/orders.json'
         '?updated_since=2022-03-06T00%3A00%3A00+%2B03%3A00&per_page=100&page=1')
 
     if r.status_code == 200:
@@ -200,7 +199,7 @@ def leset_mabel():
     df_data_all = pd.DataFrame(data)
     with open('data_leset.json', 'w') as convert_file:
         convert_file.write(json.dumps(r.json(), indent=4))
-    # разбор датафрейма на колонки с нужной информацией
+    # разбор датафрейма на колонки
     # dataframe с колонкой Номер заказа - order_lines / order_id
     order_id = []
     for i in data:
@@ -362,7 +361,7 @@ def leset_mabel():
 def stol_stul():
     # запрос к API INSALES
     r = requests.get(
-        'https://44514a0f4f2d366f3b021816ee6c00b9:478157e70fc59e285dda7517a32ed866@myshop-bfh140.myinsales.ru/admin/orders.json'
+        'https://***LOGIN***:***PASS***@***SHOPNAME***.myinsales.ru/admin/orders.json'
         '?updated_since=2022-03-06T00%3A00%3A00+%2B03%3A00&per_page=100&page=1')
 
     if r.status_code == 200:
@@ -536,7 +535,7 @@ def stol_stul():
 def visan():
     # запрос к API INSALES
     r = requests.get(
-        'https://8abde992a8cef55b79e69e945abcbb56:7ad53e318860501ddc4a38f6d9cd1ff7@myshop-xr965.myinsales.ru/admin/orders.json'
+        'https://***LOGIN***:***PASS***@***SHOPNAME***.myinsales.ru/admin/orders.json'
         '?updated_since=2022-03-06T00%3A00%3A00+%2B03%3A00&per_page=100&page=1')
 
     if r.status_code == 200:
@@ -710,7 +709,7 @@ def visan():
 def papasan():
     # запрос к API INSALES
     r = requests.get(
-        'https://6306d23c911d835d52e86742eca5183a:3a96cfac3e7ae4fdcb8578a11048af3c@myshop-bdc773.myinsales.ru/admin/orders.json'
+        'https://***LOGIN***:***PASS***@***SHOPNAME***.myinsales.ru/admin/orders.json'
         '?updated_since=2022-03-06T00%3A00%3A00+%2B03%3A00&per_page=100&page=1')
 
     if r.status_code == 200:
@@ -926,7 +925,7 @@ def upload_to_google_drive_serv_acc():
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
-    credentials = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope) #client_secret.json берем в настройках сервис аккаунта Google
     client = gspread.authorize(credentials)
 
     spreadsheet = client.open('all_site_data_CSV')
